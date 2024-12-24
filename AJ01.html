@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot - Insurance and Mutual Funds</title>
+    <script>
+        function submitForm() {
+            var name = document.getElementById("name").value;
+            var age = document.getElementById("age").value;
+            var query = document.getElementById("query").value;
+
+            if (name && age && query) {
+                var url = 'AKfycbydaN2cmsR4zEb-bmoupoyc2WAM38tyjeiGpXi6hK0';  // Replace with your Google Apps Script URL
+                var data = {
+                    'name': name,
+                    'age': age,
+                    'query': query
+                };
+                
+                var options = {
+                    method: 'post',
+                    contentType: 'application/x-www-form-urlencoded',
+                    payload: data
+                };
+                
+                fetch(url, options)
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("response").innerHTML = data;
+                        document.getElementById("form").reset();
+                    })
+                    .catch(error => console.log(error));
+            } else {
+                alert("Please fill all fields!");
+            }
+        }
+    </script>
+</head>
+<body>
+
+<h2>Welcome to Our Financial Services Chatbot!</h2>
+
+<p>Please provide your details below:</p>
+
+<form id="form">
+    <label for="name">Your Name:</label><br>
+    <input type="text" id="name" name="name"><br><br>
+    
+    <label for="age">Your Age:</label><br>
+    <input type="text" id="age" name="age"><br><br>
+
+    <label for="query">What are you interested in?</label><br>
+    <select id="query" name="query">
+        <option value="Insurance">Insurance</option>
+        <option value="Mutual Funds">Mutual Funds</option>
+    </select><br><br>
+
+    <button type="button" onclick="submitForm()">Submit</button>
+</form>
+
+<p id="response"></p>
+
+</body>
+</html>
